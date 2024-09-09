@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	listener, err := net.Listen("tcp", "127.0.0.1:200")
+	listener, err := net.Listen("tcp", ":7")
 	if err != nil {
 		fmt.Println("ERROR listener")
 		return
