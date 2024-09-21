@@ -89,7 +89,7 @@ func handleConnection(c net.Conn) {
 					fmt.Println("json false")
 					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":false}"))
 
-					fmt.Println("did it send the write??? false ver")
+					fmt.Println("did it send the write???")
 				}
 			}
 		}
@@ -97,11 +97,12 @@ func handleConnection(c net.Conn) {
 }
 
 func isPrime(n int) bool {
+  if n < 0{return false}
 	if n >= 0 && n <= 2 {
 		return true
 	}
 	for i := 2; i < n; i++ {
-		if n&i == 0 {
+		if n % i == 0 {
 			return false
 		}
 	}
