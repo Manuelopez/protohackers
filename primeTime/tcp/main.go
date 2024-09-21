@@ -82,10 +82,14 @@ func handleConnection(c net.Conn) {
 
 					fmt.Println("json true")
 					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":true}"))
+
+					fmt.Println("did it send the write???")
 				} else {
 
 					fmt.Println("json false")
 					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":false}"))
+
+					fmt.Println("did it send the write??? false ver")
 				}
 			}
 		}
