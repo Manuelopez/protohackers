@@ -74,16 +74,33 @@ func handleConnection(c net.Conn) {
 			err := json.Unmarshal([]byte(req), &data)
 			if err != nil {
 				c.Write([]byte("{\"method\":\"isPrime\",\"prime\":123}"))
+				return
 				fmt.Println("error ddecoding json")
 			} else {
 
 				fmt.Println("json decoded")
-				if big.NewInt(int64(data.Number)).ProbablyPrime(0) {
+				if isPrime(data.Number) {
+
+					fmt.Println("json true")
 					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":true}"))
 				} else {
+
+					fmt.Println("json false")
 					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":false}"))
 				}
 			}
 		}
 	}
+}
+
+func isPrime(n int) bool {
+	if n > 0 || n <= 2 {
+		return true
+	}
+	for i := 2; i < n; i++ {
+		if n&i == 0 {
+			return false
+		}
+	}
+	return true
 }
