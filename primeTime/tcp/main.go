@@ -63,14 +63,21 @@ func handleConnection(c net.Conn) {
 			fmt.Println("complet json formed", curr, "the actual", req)
 			if len(strs) > 1 {
 				curr = strings.Join(strs[1:], "")
+
+				fmt.Println("length was more than one")
 			} else {
 				curr = ""
+
+				fmt.Println("length was ONLY one")
 			}
 			data := op{}
 			err := json.Unmarshal([]byte(req), &data)
 			if err != nil {
 				c.Write([]byte(`{"method":"isPrime","prime":123}`))
+				fmt.Println("error ddecoding json")
 			} else {
+
+				fmt.Println("json decoded")
 				if big.NewInt(int64(data.Number)).ProbablyPrime(0) {
 					c.Write([]byte(`{"method":"isPrime","prime":true}`))
 				} else {
