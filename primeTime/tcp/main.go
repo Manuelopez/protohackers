@@ -63,7 +63,7 @@ func handleConnection(c net.Conn) {
 			if len(strs) > 1 {
 				curr = strings.Trim(strings.Join(strs[1:], ""), " ")
 
-				fmt.Println("length was more than one", curr)
+				fmt.Println("length was more than one -> ", curr)
 			} else {
 				curr = ""
 
@@ -93,7 +93,7 @@ func handleConnection(c net.Conn) {
 }
 
 func isPrime(n int) bool {
-	if n > 0 || n <= 2 {
+	if n >= 0 && n <= 2 {
 		return true
 	}
 	for i := 2; i < n; i++ {
