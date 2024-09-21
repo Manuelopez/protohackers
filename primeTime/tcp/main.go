@@ -73,15 +73,15 @@ func handleConnection(c net.Conn) {
 			data := op{}
 			err := json.Unmarshal([]byte(req), &data)
 			if err != nil {
-				c.Write([]byte(`{"method":"isPrime","prime":123}`))
+				c.Write([]byte("{\"method\":\"isPrime\",\"prime\":123}"))
 				fmt.Println("error ddecoding json")
 			} else {
 
 				fmt.Println("json decoded")
 				if big.NewInt(int64(data.Number)).ProbablyPrime(0) {
-					c.Write([]byte(`{"method":"isPrime","prime":true}`))
+					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":true}"))
 				} else {
-					c.Write([]byte(`{"method":"isPrime","prime":false}`))
+					c.Write([]byte("{\"method\":\"isPrime\",\"prime\":false}"))
 				}
 			}
 		}
